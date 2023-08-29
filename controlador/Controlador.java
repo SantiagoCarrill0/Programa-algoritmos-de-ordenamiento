@@ -57,11 +57,11 @@ public class Controlador implements ActionListener {
             } else if (seleccion.equals("Descendente")) {
                 Algoritmos.quickSortDesc(numeros, 0, numeros.length - 1);
             }
-        } else if (Interfaz.algoritmoComboBox.getSelectedItem().equals("Heap sort")) {
+        } else if (Interfaz.algoritmoComboBox.getSelectedItem().equals("Bucket sort")) {
             if (seleccion.equals("Ascendente")) {
-                Algoritmos.heapSort(numeros);
+                Algoritmos.bucketSort(numeros);
             } else if (seleccion.equals("Descendente")) {
-                Algoritmos.heapSortDesc(numeros);
+                Algoritmos.bucketSortDesc(numeros);
             }
         }
         Interfaz.numbersArray = numeros;

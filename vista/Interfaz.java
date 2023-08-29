@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -30,6 +31,9 @@ public class Interfaz {
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
+        //ICONO DEL PROGRAMA
+        ImageIcon icono = new ImageIcon(getClass().getResource("/vista/icono/icono.png"));
+        ventana.setIconImage(icono.getImage());
         //PANEL
         JPanel panel = new JPanel();
         panel.setBackground(Color.BLUE);
@@ -102,7 +106,7 @@ public class Interfaz {
         gbcLabelAlgoritmo.insets = new Insets(10, 10, 5, 10);
         panel.add(labelAlgoritmo, gbcLabelAlgoritmo);
         //COMBO BOX ELECCION DE ALGORITMO
-        String[] algoritmos = {"Merge sort", "Quick sort", "Heap sort"};
+        String[] algoritmos = {"Merge sort", "Quick sort", "Bucket sort"};
         algoritmoComboBox = new JComboBox<>(algoritmos); 
         GridBagConstraints gbcAlgoritmoComboBox = new GridBagConstraints();
         gbcAlgoritmoComboBox.gridx = 1;

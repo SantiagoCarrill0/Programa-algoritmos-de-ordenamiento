@@ -1,5 +1,8 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Algoritmos {
     //Merge sort orden Ascendente
     public static void mergeSort(int[] arr, int left, int right) {
@@ -65,7 +68,7 @@ public class Algoritmos {
         }
         int i = 0, j = 0, k = left;
         while (i < n1 && j < n2) {
-            if (leftArr[i] >= rightArr[j]) { // Compare in descending order
+            if (leftArr[i] >= rightArr[j]) {
                 arr[k] = leftArr[i];
                 i++;
             } else {
@@ -137,62 +140,65 @@ public class Algoritmos {
         arr[i] = arr[j];
         arr[j] = temp;
     }
-    //Heap sort orden ascendente
-    public static void heapSort(int arr[]) {
-        int n = arr.length;
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(arr, n, i);
+    //Bucket sort orden Ascendente
+    public static void bucketSort(int[] arr) {
+        if (arr.length == 0) {
+            return;
         }
-        for (int i = n - 1; i > 0; i--) {
-            int temp = arr[0];
-            arr[0] = arr[i];
-            arr[i] = temp;
-            heapify(arr, i, 0);
+        int minValue = arr[0];
+        int maxValue = arr[0];
+        for (int value : arr) {
+            if (value < minValue) {
+                minValue = value;
+            } else if (value > maxValue) {
+                maxValue = value;
+            }
         }
-    }
-    private static void heapify(int arr[], int n, int i) {
-        int largest = i;
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
-        if (left < n && arr[left] > arr[largest]) {
-            largest = left;
+        int range = maxValue - minValue + 1;
+        List<List<Integer>> buckets = new ArrayList<>(range);
+
+        for (int i = 0; i < range; i++) {
+            buckets.add(new ArrayList<>());
         }
-        if (right < n && arr[right] > arr[largest]) {
-            largest = right;
+        for (int value : arr) {
+            int index = value - minValue;
+            buckets.get(index).add(value);
         }
-        if (largest != i) {
-            int swap = arr[i];
-            arr[i] = arr[largest];
-            arr[largest] = swap;
-            heapify(arr, n, largest);
-        }
-    }
-    //Heap sort orden Descendente
-    public static void heapSortDesc(int arr[]) {
-        int n = arr.length;
-        for (int i = n / 2 - 1; i <= 0; i--)
-            heapifyDesc(arr, n, i);
-        for (int i = n - 1; i < 0; i--) {
-            int temp = arr[0];
-            arr[0] = arr[i];
-            arr[i] = temp;
-            heapifyDesc(arr, i, 0);
+        int index = 0;
+        for (List<Integer> bucket : buckets) {
+            for (int value : bucket) {
+                arr[index++] = value;
+            }
         }
     }
-    private static void heapifyDesc(int arr[], int n, int i) {
-        int largest = i;
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
-        if (left < n && arr[left] > arr[largest])
-            largest = left;
-        if (right < n && arr[right] > arr[largest])
-            largest = right;
-        if (largest != i) {
-            int swap = arr[i];
-            arr[i] = arr[largest];
-            arr[largest] = swap;
-            heapifyDesc(arr, n, largest); // Corrección: llamada a heapifyDesc en lugar de heapify
+    //Bucket sort orden Descendente
+    public static void bucketSortDesc(int[] arr) {
+        if (arr.length == 0) {
+            return;
         }
-    }
-    
+        int minValue = arr[0];
+        int maxValue = arr[0];
+        for (int value : arr) {
+            if (value < minValue) {
+                minValue = value;
+            } else if (value > maxValue) {
+                maxValue = value;
+            }
+        }
+        int range = maxValue - minValue + 1;
+        List<List<Integer>> buckets = new ArrayList<>(range);
+        for (int i = 0; i < range; i++) {
+            buckets.add(new ArrayList<>());
+        }
+        for (int value : arr) {
+            int index = value - minValue;
+            buckets.get(index).add(value);
+        }
+        int index = 0;
+        for (int i = range - 1; i >= 0; i--) {
+            for (int value : buckets.get(i)) {
+                arr[index++] = value;
+            }
+        }
+    } 
 }
